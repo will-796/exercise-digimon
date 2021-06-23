@@ -36,14 +36,17 @@ class App extends React.Component {
     const { digimon, searchDigimon, isFetching, errorMessage } = this.state;
     return (
       <div className="App">
-        <input
-          value={ searchDigimon }
-          type="text"
-          onChange={ ({ target }) => this.inputValue(target.value) }
-          data-testid="input"
-        />
+        <label htmlFor="search-input">
+          Digimon
+          <input
+            id="search-input"
+            value={ searchDigimon }
+            onChange={ ({ target }) => this.inputValue(target.value) }
+            data-testid="search-input"
+          />
+        </label>
         <button
-          data-testid="buttonSearch"
+          data-testid="search-button"
           onClick={ this.requestDigimon }
           type="button"
         >
