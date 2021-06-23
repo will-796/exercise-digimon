@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 const Digimon = ({ digimon }) => (
   <div>
     <h2 data-testid="digimonName">{digimon.name}</h2>
-    <p data-testid="digimonLevel">
-      level:
-      {digimon.level}
-    </p>
+    <p data-testid="digimonLevel">{`level: ${digimon.level}`}</p>
     <img src={ digimon.img } alt={ digimon.name } />
   </div>
 );
