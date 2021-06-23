@@ -26,7 +26,7 @@ class App extends React.Component {
         .then((results) => this.setState((state) => ({
           ...state,
           digimon: results[0],
-          errorMessage: results.errorMessage,
+          errorMessage: results.ErrorMsg,
           isFetching: true,
         })));
     }
