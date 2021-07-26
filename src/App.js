@@ -6,16 +6,19 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = { searchDigimon: '', isFetching: false, errorMessage: '' };
+
+    this.inputValue = this.inputValue.bind(this);
+    this.requestDigimon = this.requestDigimon.bind(this);
   }
 
-  inputValue = (value) => {
+  inputValue(value) {
     this.setState((state) => ({
       ...state,
       searchDigimon: value,
     }));
   }
 
-  requestDigimon = async () => {
+  async requestDigimon() {
     const { searchDigimon } = this.state;
     if (searchDigimon) {
       fetch(`https://digimon-api.vercel.app/api/digimon/name/${searchDigimon}`)
@@ -23,7 +26,7 @@ class App extends React.Component {
         .then((results) => this.setState((state) => ({
           ...state,
           digimon: results[0],
-          errorMessage: results["ErrorMsg"],
+          errorMessage: results.ErrorMsg,
           isFetching: true,
         })));
     }
@@ -33,22 +36,26 @@ class App extends React.Component {
     const { digimon, searchDigimon, isFetching, errorMessage } = this.state;
     return (
       <div className="App">
-        <input
-          value={searchDigimon}
-          type="text"
-          onChange={({ target }) => this.inputValue(target.value)}
-          data-testid="input"
-        />
+        <label htmlFor="search-input">
+          Digimon
+          <input
+            id="search-input"
+            value={ searchDigimon }
+            onChange={ ({ target }) => this.inputValue(target.value) }
+            data-testid="search-input"
+          />
+        </label>
         <button
-          data-testid="buttonSearch"
-          onClick={this.requestDigimon}
+          data-testid="search-button"
+          onClick={ this.requestDigimon }
           type="button"
         >
           Search Digimon
         </button>
-        { isFetching && !errorMessage
-          ? <Digimon digimon={digimon} />
-          : <h1>{errorMessage || 'Faça uma pesquisa'}</h1>
+        {
+          isFetching && !errorMessage
+            ? <Digimon digimon={ digimon } />
+            : <h1>{errorMessage || 'Faça uma pesquisa'}</h1>
         }
       </div>
     );
