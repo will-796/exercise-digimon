@@ -44,6 +44,10 @@ Este repositório contém uma aplicação funcional, ela utiliza a [Digimon API]
 
 A seta azul mostra o local que deve estar com o valor de 100, o que indica a finalização do exercício com todas as linhas do código testadas.
 
+Para implementar os seus testes, edite os arquivos `App.test.js` e `Digimon.test.js` que se encontram dentro da pasta src na raiz do projeto.
+
+Ler, entender a aplicação e saber o que testar também é parte do exercício. Atente-se aos logs que é recebido ao rodar os testes, logo abaixo há mais instruções de como saber o que está sendo testado ou não.
+
 ### INSTRUÇÕES
 
 * Ao rodar o comando `npm run test-coverage`, será gerada uma nova pasta na raiz do seu projeto chamada `coverage`, após criada, abra o arquivo `./coverage/lcov-report/index.html` usando a extensão `Live Server` do seu VSCode.
