@@ -2,14 +2,13 @@
   "name": "digimons-api",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
@@ -21,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-coverage": "react-scripts test --coverage --watchAll=false"
+    "test-coverage": "react-scripts test --coverage --watchAll=false",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,10 +39,14 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-syntax-jsx": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-react": "^7.16.7",
     "@stryker-mutator/core": "^4.0.0",
-    "@stryker-mutator/jest-runner": "^4.0.0"
+    "@stryker-mutator/jest-runner": "^4.0.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint": "^7.5.0",
+    "eslint-config-trybe-frontend": "^1.2.3",
+    "eslint-plugin-sonarjs": "^0.13.0"
   }
 }

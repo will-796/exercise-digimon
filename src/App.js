@@ -5,59 +5,50 @@ import Digimon from './Digimon';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { searchDigimon: '', isFetching: false, errorMessage: '' };
+    this.state = { searchDigimon: '', isFetched: false, errorMessage: '' };
 
     this.inputValue = this.inputValue.bind(this);
     this.requestDigimon = this.requestDigimon.bind(this);
   }
 
-  inputValue(value) {
-    this.setState((state) => ({
-      ...state,
-      searchDigimon: value,
-    }));
+  inputValue(searchDigimon) {
+    this.setState({ searchDigimon });
   }
 
   async requestDigimon() {
     const { searchDigimon } = this.state;
     if (searchDigimon) {
-      fetch(`https://digimon-api.vercel.app/api/digimon/name/${searchDigimon}`)
-        .then((res) => res.json())
-        .then((results) => this.setState((state) => ({
-          ...state,
-          digimon: results[0],
-          errorMessage: results.ErrorMsg,
-          isFetching: true,
-        })));
+      const URL = 'https://digimon-api.vercel.app/api/digimon/name';
+      const result = await fetch(`${URL}/${searchDigimon}`);
+      const digimons = await result.json();
+      this.setState({
+        digimon: digimons[0],
+        errorMessage: digimons.ErrorMsg,
+        isFetched: true,
+      });
     }
   }
 
   render() {
-    const { digimon, searchDigimon, isFetching, errorMessage } = this.state;
+    const { digimon, searchDigimon, isFetched, errorMessage } = this.state;
     return (
-      <div className="App">
+      <main className="App">
         <label htmlFor="search-input">
           Digimon
           <input
             id="search-input"
             value={ searchDigimon }
             onChange={ ({ target }) => this.inputValue(target.value) }
-            data-testid="search-input"
           />
         </label>
         <button
-          data-testid="search-button"
           onClick={ this.requestDigimon }
           type="button"
         >
           Search Digimon
         </button>
-        {
-          isFetching && !errorMessage
-            ? <Digimon digimon={ digimon } />
-            : <h1>{errorMessage || 'Faça uma pesquisa'}</h1>
-        }
-      </div>
+        {isFetched && <Digimon digimon={ digimon } error={ errorMessage } /> }
+      </main>
     );
   }
 }
