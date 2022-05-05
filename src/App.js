@@ -18,14 +18,18 @@ class App extends React.Component {
   async requestDigimon() {
     const { searchDigimon } = this.state;
     if (searchDigimon) {
-      const URL = 'https://digimon-api.vercel.app/api/digimon/name';
-      const result = await fetch(`${URL}/${searchDigimon}`);
-      const digimons = await result.json();
-      this.setState({
-        digimon: digimons[0],
-        errorMessage: digimons.ErrorMsg,
-        isFetched: true,
-      });
+      try {
+        const URL = 'https://digimon-api.vercel.app/api/digimon/name';
+        const result = await fetch(`${URL}/${searchDigimon}`);
+        const digimons = await result.json();
+        this.setState({
+          digimon: digimons[0],
+          errorMessage: digimons.ErrorMsg,
+          isFetched: true,
+        });
+      } catch (error) {
+        console.log(`Erro ao fazer a requisição: ${error}`);
+      }
     }
   }
 

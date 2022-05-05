@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+mutation.html
 
 # production
 /build
